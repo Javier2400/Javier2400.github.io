@@ -1,0 +1,11 @@
+@import url("../vendor/normalize.css");
+@import url("../vendor/fonts.css");
+
+@import url("../blocks/banner.css");
+@import url("../blocks/footer.css");
+@import url("../blocks/main-content.css");
+@import url("../blocks/modal.css");
+@import url("../blocks/place-card.css");
+@import url("../blocks/places-gallery.css");
+@import url("../blocks/site.css");
+@import url("../blocks/traveler-profile.css");

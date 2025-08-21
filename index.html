@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>Magical Mexico</title>
+    <link href="./pages/index.css" rel="stylesheet" />
+  </head>
+
+  <body class="site">
+    <div class="site__wrapper">
+      
+      <!-- Block: banner -->
+      <!-- Contains the main site logo -->
+      <header class="banner site__section">
+        <img
+          alt="Magical Mexico Logo"
+          class="banner__logo"
+          src="./images/logo-mexico.jpeg"
+        />
+      </header>
+
+      <!-- Block: main-content -->
+      <!-- Contains the main content of the page (traveler profile + gallery) -->
+      <main class="main-content">
+        
+        <!-- Block: traveler-profile -->
+        <!-- Displays the traveler profile with avatar, name, bio, and edit/add buttons -->
+        <section class="traveler-profile site__section">
+          <img class="traveler-profile__image" src="./images/quaso.jpg" alt="Avatar" />
+          
+          <div class="traveler-profile__details">
+            <h1 class="traveler-profile__name">Javier</h1>
+            
+            <!-- Button to open the edit profile modal -->
+            <button
+              aria-label="Edit traveler profile"
+              class="traveler-profile__edit-btn"
+              type="button"
+            ></button>
+            
+            <p class="traveler-profile__bio">PhD in Information Technology</p>
+          </div>
+
+          <!-- Button to open the add new place modal -->
+          <button
+            aria-label="Add new place"
+            class="traveler-profile__add-place-btn"
+            type="button"
+          ></button>
+        </section>
+
+        <!-- Block: places-gallery -->
+        <!-- Container for the list of place cards -->
+        <section class="places-gallery site__section">
+          <ul class="places-gallery__list"></ul>
+        </section>
+      </main>
+
+      <!-- Block: footer -->
+      <!-- Footer section with copyright -->
+      <footer class="footer site__section">
+        <p class="footer__text">© Magical Mexico</p>
+      </footer>
+
+      <!-- Block: modal (edit profile) -->
+      <!-- Modal to edit traveler name and description -->
+      <div class="modal" id="modal-edit-profile">
+        <div class="modal__content">
+          <button
+            aria-label="Close modal"
+            class="modal__close"
+            type="button"
+          ></button>
+          <h3 class="modal__title">Edit Profile</h3>
+          <form class="modal__form" id="form-edit-profile" novalidate>
+            
+            <!-- Input: traveler name -->
+            <label class="modal__field">
+              <input
+                id="profile-name"
+                class="modal__input modal__input_type_name"
+                name="profile-name"
+                placeholder="Name"
+                minlength="2"
+                maxlength="30"
+                required
+                type="text"
+              />
+              <span class="modal__error" id="profile-name-error"></span>
+            </label>
+
+            <!-- Input: traveler description -->
+            <label class="modal__field">
+              <input
+                id="profile-description"
+                class="modal__input modal__input_type_description"
+                name="profile-description"
+                placeholder="Description"
+                minlength="2"
+                maxlength="200"
+                required
+                type="text"
+              />
+              <span class="modal__error" id="profile-description-error"></span>
+            </label>
+
+            <!-- Button to submit the profile form -->
+            <button class="modal__button modal__submit" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Block: modal (new place) -->
+      <!-- Modal to add a new place with title and image URL -->
+      <div class="modal" id="modal-new-place">
+        <div class="modal__content">
+          <button
+            aria-label="Close modal"
+            class="modal__close"
+            type="button"
+          ></button>
+          <h3 class="modal__title">Add New Place</h3>
+          <form class="modal__form" id="form-new-place" novalidate>
+            
+            <!-- Input: place title -->
+            <label class="modal__field">
+              <input
+                id="place-title"
+                class="modal__input modal__input_type_title"
+                name="place-name"
+                placeholder="Title"
+                minlength="2"
+                maxlength="30"
+                required
+                type="text"
+              />
+              <span class="modal__error" id="place-title-error"></span>
+            </label>
+
+            <!-- Input: place image URL -->
+            <label class="modal__field">
+              <input
+                id="place-image-url"
+                class="modal__input modal__input_type_image-url"
+                name="link"
+                placeholder="Image URL"
+                required
+                type="url"
+              />
+              <span class="modal__error" id="place-image-url-error"></span>
+            </label>
+
+            <!-- Button to create the new place -->
+            <button class="modal__button modal__submit" type="submit">Create</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Block: modal (image view) -->
+      <!-- Modal to display an enlarged image of a place with caption -->
+      <div class="modal" id="modal-image-view">
+        <div class="modal__box modal__box_type_image">
+          <button
+            aria-label="Close modal"
+            class="modal__close"
+            type="button"
+          ></button>
+          <img alt="" class="modal__image" src="#" />
+          <p class="modal__caption"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template: place card -->
+    <!-- Used to generate new place cards dynamically -->
+    <template id="template-place-card">
+      <li class="place-card">
+        <img class="place-card__image" src="#" alt="" />
+        
+        <!-- Button to delete the place card -->
+        <button
+          aria-label="Remove place"
+          class="place-card__delete-button"
+          type="button"
+        ></button>
+        
+        <div class="place-card__description">
+          <h2 class="place-card__title">this text is hidden until mounted</h2>
+          
+          <!-- Button to like the place -->
+          <button
+            aria-label="Like place"
+            class="place-card__like-button"
+            type="button"
+          ></button>
+        </div>
+      </li>
+    </template>
+  </body>
+
+  <!-- Main JavaScript file -->
+  <script type="module" src="./scripts/script.js"></script>
+</html>

@@ -1,0 +1,16 @@
+.banner {
+  min-height: 120px;
+  font-family: "Inter", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  /* Use RGBA to specify opacity */
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+/* The best solution is shown here - suggest it in "Could be improved" */
+
+.banner__logo {
+  width: 173px;
+  height: 33px;
+  object-fit: contain;
+}

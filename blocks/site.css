@@ -1,0 +1,22 @@
+.site {
+  background: #000;
+}
+
+.site__content {
+  padding: 0 40px;
+  background-color: black;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  /* It's about time to tell students about sticky footer (in "Could be improved") */
+}
+
+.site__section {
+  width: 100%;
+  max-width: 880px;
+  box-sizing: border-box;
+  position: relative;
+  margin: 0 auto;
+}
