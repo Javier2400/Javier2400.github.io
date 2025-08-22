@@ -90,8 +90,8 @@ modalsClose.forEach((modalClose) => {
 
 document.querySelectorAll(".modal").forEach((modal) => {
     modal.addEventListener("click", (e) => {
-        if (!e.target.closest(".modal__image")) {
-        modal.classList.remove("modal_open");
+        if (!e.target.closest(".modal__content") && !e.target.closest(".modal__box")) {
+        modal.classList.remove("modal_is-opened");
         }
     });
 });
