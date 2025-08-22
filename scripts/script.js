@@ -88,6 +88,15 @@ modalsClose.forEach((modalClose) => {
     });
 });
 
+document.querySelectorAll(".modal").forEach((modal) => {
+    modal.addEventListener("click", (e) => {
+        if (!e.target.closest(".modal__image")) {
+        modal.classList.remove("modal_open");
+        }
+    });
+});
+
+
 // Form validation
 
 // FIX: antes deshabilitaba el botón cuando ALGÚN input era válido.

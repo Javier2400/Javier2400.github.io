@@ -125,7 +125,10 @@
 }
 
 .modal__image {
-  max-width: 100%;
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 10px;
   object-fit: cover;
 }
 
