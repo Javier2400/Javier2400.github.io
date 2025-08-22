@@ -68,6 +68,12 @@ formNewPlace.addEventListener("submit", (evt) => {
     modalInputs.forEach((input) => {
         tempCard[input.name] = input.value;
     });
+
+    // FIX: mapear el nombre del título del lugar del HTML (place-name) a "name" sin tocar el HTML
+    if (tempCard["place-name"] && !tempCard.name) {
+        tempCard.name = tempCard["place-name"];
+    }
+
     createCard(tempCard);
     formNewPlace.reset();
     modalNewPlace.classList.remove("modal_is-opened");
@@ -84,23 +90,24 @@ modalsClose.forEach((modalClose) => {
 
 // Form validation
 
-// Returns true if at least one input is valid
+// FIX: antes deshabilitaba el botón cuando ALGÚN input era válido.
+// Ahora devuelve true solo si TODOS son válidos.
 const validarboton = (modalInputs) => {
-    return modalInputs.some((inputElement) => {
-        return inputElement.validity.valid;
-    });
+    return modalInputs.every((inputElement) => inputElement.validity.valid);
 };
 
-// Handles validation for all modal forms (disables buttons and shows error messages)
 const modalForms = Array.from(document.querySelectorAll(".modal__form"));
 modalForms.forEach((form) => {
     const modalInputs = Array.from(form.querySelectorAll(".modal__input"));
     const modalButton = form.querySelector(".modal__button"); 
-    modalButton.disabled = validarboton(modalInputs);
+
+    // FIX: deshabilitar si NO todos son válidos
+    modalButton.disabled = !validarboton(modalInputs);
 
     modalInputs.forEach((modalInput) => {
         modalInput.addEventListener("input", () => {
-            modalButton.disabled = validarboton(modalInputs);
+            // FIX: mantener la misma lógica corregida en el input
+            modalButton.disabled = !validarboton(modalInputs);
 
             let modalError = form.querySelector("#" + modalInput.id + "-error");
             if (!modalInput.validity.valid) {
@@ -125,18 +132,24 @@ const createCard = (card) => {
     const placeCardImage = template.querySelector(".place-card__image");
     const placeCardTitle = template.querySelector(".place-card__title");
 
-    placeCardImage.src = card.link;
-    placeCardImage.alt = card.name;
-    placeCardTitle.textContent = card.name;
+    // FIX: ser tolerantes al nombre desde "place-name" o "name" y al link vacío
+    const title = (card.name ?? card["place-name"] ?? "").trim();
+    const link = (card.link ?? "").trim();
+
+    placeCardImage.src = link || "#";
+    placeCardImage.alt = title;
+    placeCardTitle.textContent = title || "";
 
     // Opens image modal when clicking on a card image
     placeCardImage.addEventListener("click", () => {
+        // Solo abrir si hay imagen válida
+        if (!link) return;
         modalImageView.classList.toggle("modal_is-opened");
         const modalImage = modalImageView.querySelector(".modal__image");
         const modalCaption = modalImageView.querySelector(".modal__caption");
-        modalImage.src = placeCardImage.src;
-        modalImage.alt = placeCardImage.alt;
-        modalCaption.textContent = placeCardTitle.textContent;
+        modalImage.src = link;
+        modalImage.alt = title;
+        modalCaption.textContent = title;
     });
 
     // Toggles like button state
